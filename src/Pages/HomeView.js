@@ -11,10 +11,11 @@ export default function HomeView() {
                 <div className="col-sm-12 col-md-4 py-3 d-flex align-items-stretch">
                     <div className="card">
                         <div className="card-body d-flex flex-column">
-                            <h5 className="card-title"><u>Repositorio Contrato</u></h5>
+                            <h5 className="card-title"><u>Repositorios</u></h5>
                             <p className="card-text mb-4">Aquí podemos consultar el repositorio donde está alojado el código del contrato inteligente
-                                sobre el cual trabaja esta aplicación.</p>
-                            <a href="https://github.com/AlvasanG/PensionsTFG" className="btn btn-primary mt-auto">Github</a>
+                                sobre el cual trabaja esta aplicación y de la aplicación web.</p>
+                            <a href="https://github.com/AlvasanG/PensionsTFG" className="btn btn-primary mt-auto mb-2">Github Contrato</a>
+                            <a href="https://github.com/AlvasanG/pensions_web3" className="btn btn-primary mt-auto">Github Web</a>
                         </div>
                     </div>
                 </div>
