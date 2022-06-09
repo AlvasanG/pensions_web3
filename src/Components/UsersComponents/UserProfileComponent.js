@@ -14,10 +14,10 @@ function UserProfileComponent() {
     const [userInfo, setUserInfo] = useState();
 
     const units = [
-        [1, "second(s)"],
-        [60, "minute(s)"],
-        [60 * 60, "hour(s)"],
-        [60 * 60 * 24, "day(s)"]
+        [1, "segundo(s)"],
+        [60, "minuto(s)"],
+        [60 * 60, "hora(s)"],
+        [60 * 60 * 24, "día(s)"]
     ];
 
     useEffect(() => {
@@ -99,19 +99,22 @@ function UserProfileComponent() {
     }
 
     return (
-        <div>
+        <div className="info-display">
+            <div className="mb-3">
+                <h1>Perfil del pensionista</h1>
+            </div>
             {userInfo === undefined
                 ? <h4>El pensionista no está registrado</h4>
                 : <div>
-                    <h2>Address: {userInfo.address}</h2>
-                    <h3>Total contributed: {userInfo.totalContributedAmount} wei</h3>
-                    <h3>Created at: {userInfo.createdAtTime.toLocaleString()}</h3>
-                    <h3>Benefit duration: {getDisplayTime(userInfo.benefitDuration)}</h3>
-                    <h3>Finish pension: {userInfo.finishPensionDate.toLocaleString()}</h3>
-                    <h3>Retired: {userInfo.isPensionerRetired ? "Yes" : "No"}</h3>
-                    <h3>Retire at: {userInfo.retireAtDate.toLocaleString()}</h3>
+                    <h2>Dirección: {userInfo.address}</h2>
+                    <h3>Contribuciones totales: {userInfo.totalContributedAmount} wei</h3>
+                    <h3>Fecha creación: {userInfo.createdAtTime.toLocaleString()}</h3>
+                    <h3>Duración beneficios: {getDisplayTime(userInfo.benefitDuration)}</h3>
+                    <h3>Fecha fin pensión: {userInfo.finishPensionDate.toLocaleString()}</h3>
+                    <h3>Retirado: {userInfo.isPensionerRetired ? "Sí" : "No"}</h3>
+                    <h3>Fecha jubilación: {userInfo.retireAtDate.toLocaleString()}</h3>
                 </div>}
-            <button onClick={async () => await fetchUserData()}>Actualizar</button>
+            <button className="btn btn-primary btn-lg" onClick={async () => await fetchUserData()}>Actualizar</button>
         </div>
     );
 }

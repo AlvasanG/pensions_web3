@@ -28,8 +28,10 @@ function CalculateStateComponent() {
 
     return (
         <div className="info-display">
-            <h4>Realizar el reparto de las pensiones</h4>
-            <button onClick={() => calculateState()}>Repartir</button>
+            <div className="mb-3">
+                <h1>Realizar el reparto de las pensiones</h1>
+            </div>
+            <button className="btn btn-primary btn-lg" onClick={() => calculateState()}>Repartir</button>
         </div>
     );
 }

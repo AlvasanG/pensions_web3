@@ -16,10 +16,10 @@ function ContractInfoComponent() {
     const [lastPayoutDate, setLastPayoutDate] = useState();
 
     const units = [
-        [1, "second(s)"],
-        [60, "minute(s)"],
-        [60 * 60, "hour(s)"],
-        [60 * 60 * 24, "day(s)"]
+        [1, "segundo(s)"],
+        [60, "minuto(s)"],
+        [60 * 60, "hora(s)"],
+        [60 * 60 * 24, "día(s)"]
     ];
 
     useEffect(() => {
@@ -92,6 +92,9 @@ function ContractInfoComponent() {
 
     return (
         <div className="info-display">
+            <div className="mb-3">
+                <h1>Información del contrato</h1>
+            </div>
             <h2>Dirección: {pensionSystemAddress}</h2>
             <h3>Saldo total: {contractBalance === undefined ? 0 : contractBalance} wei</h3>
             <h3>Nº transacciones: {transactionCount === undefined ? 0 : transactionCount}</h3>
@@ -99,7 +102,7 @@ function ContractInfoComponent() {
             <h4>Fecha creación: {creationDate === undefined ? "" : creationDate.toLocaleString()}</h4>
             <h4>Intervalo reparto: {payoutInterval === undefined ? "0 second(s)" : getDisplayTime(payoutInterval)}</h4>
             <h4>Fecha último reparto: {lastPayoutDate === undefined ? "" : lastPayoutDate.toLocaleString()}</h4>
-            <button onClick={async () => await fetchContractData()}>Actualizar</button>
+            <button className="btn btn-primary btn-lg" onClick={async () => await fetchContractData()}>Actualizar</button>
         </div>
     );
 }

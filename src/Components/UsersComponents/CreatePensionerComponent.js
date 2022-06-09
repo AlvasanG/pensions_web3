@@ -12,15 +12,15 @@ const pensionSystemAddress = config.PENSION_SYSTEM_ADDRESS;
 function CreatePensionerComponent() {
 
     const [retireDate, onRetireDateChange] = useState(new Date());
-    const [benefitDuration, setBenefitDuration] = useState(0);
-    const [unitsIndex, setUnitsIndex] = useState("1");
+    const [benefitDuration, setBenefitDuration] = useState(1);
+    const [unitsIndex, setUnitsIndex] = useState("2");
 
     const units = [
-        [1, 0, "second(s)"],
-        [60, 1, "minute(s)"],
-        [60 * 60, 2, "hour(s)"],
-        [60 * 60 * 24, 3, "day(s)"],
-        [30 * 60 * 60 * 24, 4, "month(s) - 30 days"]
+        [1, 0, "segundo(s)"],
+        [60, 1, "minuto(s)"],
+        [60 * 60, 2, "hora(s)"],
+        [60 * 60 * 24, 3, "día(s)"],
+        [30 * 60 * 60 * 24, 4, "mes(es) - 30 días"]
     ];
 
     async function createPensioner() {
@@ -56,22 +56,35 @@ function CreatePensionerComponent() {
     }
 
     return (
-        <div className="info-display">
-            Fecha retiro:
-            <Calendar onChange={onRetireDateChange} value={retireDate} />
-            Duración beneficios:
-            <form>
-                <input type="number" min="0" value={benefitDuration} onChange={handleBenefitDurationChange} />
-                <select id="duration_units" name="Units" value={unitsIndex} onChange={handleUnitsChange}>
-                    {units.map(item => {
-                        return <option key={item[1].toString()} value={item[1]}>{item[2]}</option>
-                    })}
-                </select>
-            </form>
-            <div>
-                <button onClick={() => createPensioner()}>Crear pensionista</button>
+        <div className="info-display row">
+            <div className="mb-3">
+                <h1>Crear pensionista</h1>
             </div>
-        </div>
+            <div className="col-lg-6 col-sm-12">
+                <h4>Fecha de retiro</h4>
+                <Calendar onChange={onRetireDateChange} value={retireDate} />
+            </div>
+            <div className="col-lg-6 col-sm-12">
+                <h4>Duración beneficios</h4>
+                <div class="row">
+                    <div class="col">
+                        <label className="form-label" htmlFor="durationInput">Duración</label>
+                        <input className="form-control" id="durationInput" type="number" min="0" value={benefitDuration} onChange={handleBenefitDurationChange} />
+                    </div>
+                    <div class="col">
+                        <label className="form-label" htmlFor="durationUnits">Unidades</label>
+                        <select id="durationUnits" className="form-select" name="Units" value={unitsIndex} onChange={handleUnitsChange}>
+                            {units.map(item => {
+                                return <option key={item[1].toString()} value={item[1]}>{item[2]}</option>
+                            })}
+                        </select>
+                    </div>
+                </div>
+            </div >
+            <div className="col-12 text-center">
+                <button className="bnt btn-primary btn-lg" onClick={() => createPensioner()}>Crear pensionista</button>
+            </div>
+        </div >
     );
 }
 

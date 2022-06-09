@@ -12,10 +12,10 @@ function UserListComponent() {
     const [pensionerList, setPensionerList] = useState([]);
 
     const units = [
-        [1, "second(s)"],
-        [60, "minute(s)"],
-        [60 * 60, "hour(s)"],
-        [60 * 60 * 24, "day(s)"]
+        [1, "segundo(s)"],
+        [60, "minuto(s)"],
+        [60 * 60, "hora(s)"],
+        [60 * 60 * 24, "día(s)"]
     ];
 
     async function getPensionersList() {
@@ -94,35 +94,41 @@ function UserListComponent() {
 
     return (
         <div className="info-display">
+            <div className="mb-3">
+                <h1>Listado de pensionistas</h1>
+            </div>
             {pensionerList.length === 0
                 ? <h4>No hay pensionistas</h4>
-                : <table>
-                    <thead>
-                        <tr>
-                            <th>Dirección</th>
-                            <th>Total contribuido (wei)</th>
-                            <th>Fecha creación</th>
-                            <th>Duración beneficios</th>
-                            <th>Fecha fin</th>
-                            <th>Retirado</th>
-                            <th>Fecha retiro</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {pensionerList.map(item => {
-                            return <tr key={item.pensioner.address}>
-                                <td>{item.address}</td>
-                                <td>{item.pensioner.totalContributedAmount}</td>
-                                <td>{item.pensioner.createdAtTime.toLocaleString()}</td>
-                                <td>{getDisplayTime(item.pensioner.benefitDuration)}</td>
-                                <td>{item.pensioner.finishPensionDate.toLocaleString()}</td>
-                                <td>{item.pensioner.isPensionerRetired ? "Sí" : "No"}</td>
-                                <td>{item.pensioner.retireAtDate.toLocaleString()}</td>
+                : <div className="table-responsive">
+                    <table className="table table-striped table-hover align-middle">
+                        <caption>Listado de usuarios</caption>
+                        <thead>
+                            <tr>
+                                <th>Dirección</th>
+                                <th>Contribuciones totales (wei)</th>
+                                <th>Fecha creación</th>
+                                <th>Duración beneficios</th>
+                                <th>Fecha fin pensión</th>
+                                <th>Retirado</th>
+                                <th>Fecha jubilación</th>
                             </tr>
-                        })}
-                    </tbody>
-                </table>}
-            <button onClick={async () => await getPensionersList()}>Actualizar lista</button>
+                        </thead>
+                        <tbody>
+                            {pensionerList.map(item => {
+                                return <tr key={item.pensioner.address}>
+                                    <td>{item.address}</td>
+                                    <td>{item.pensioner.totalContributedAmount}</td>
+                                    <td>{item.pensioner.createdAtTime.toLocaleString()}</td>
+                                    <td>{getDisplayTime(item.pensioner.benefitDuration)}</td>
+                                    <td>{item.pensioner.finishPensionDate.toLocaleString()}</td>
+                                    <td>{item.pensioner.isPensionerRetired ? "Sí" : "No"}</td>
+                                    <td>{item.pensioner.retireAtDate.toLocaleString()}</td>
+                                </tr>
+                            })}
+                        </tbody>
+                    </table>
+                </div>}
+            <button className="btn btn-primary btn-lg" onClick={async () => await getPensionersList()}>Actualizar lista</button>
         </div>
     );
 }
