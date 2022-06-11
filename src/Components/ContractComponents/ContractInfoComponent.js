@@ -31,11 +31,13 @@ function ContractInfoComponent() {
     }, [pensionSystemAddress])
 
 
+    // Recupera la informacion del contrato
     async function fetchContractData() {
         await getContractInfo();
         await getPensionSystemInfo();
     }
 
+    // Recupera la informacion relativa al contrato y la cadena de bloques
     async function getContractInfo() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -52,11 +54,14 @@ function ContractInfoComponent() {
                     setBalance(responseBalance.toString());
                 }
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }
 
+    // Recupera la informacion del sistema de pensiones
     async function getPensionSystemInfo() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -74,7 +79,9 @@ function ContractInfoComponent() {
                 setPayoutInterval(responsePayoutInterval.toNumber())
                 setLastPayoutDate(new Date(responseLastPayout.toNumber() * 1000))
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }

@@ -21,6 +21,7 @@ function App() {
   const [accounts, setAccounts] = useState([]);
   const [balances, setBalances] = useState([]);
 
+  // Recupera las cuentas conectadas desde MetaMask
   async function connectAccounts() {
     if (window.ethereum) {
       const accounts = await window.ethereum.request({
@@ -30,6 +31,7 @@ function App() {
     }
   }
 
+  // Intenta recuperar las cuentas cuando inicia la aplicación
   useEffect(() => {
     async function fetchData() {
       await connectAccounts();
@@ -37,6 +39,7 @@ function App() {
     fetchData();
   }, []);
 
+  // Cuando cambian las cuentas recupera el balance total de las cuentas
   useEffect(() => {
     async function retrieveBalances() {
       if (window.ethereum) {

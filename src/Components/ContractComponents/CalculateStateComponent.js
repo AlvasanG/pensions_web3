@@ -8,6 +8,7 @@ const pensionSystemAddress = config.PENSION_SYSTEM_ADDRESS;
 
 function CalculateStateComponent() {
 
+    // Llama a la función para hacer el reparto de las pensiones
     async function calculateState() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -19,9 +20,10 @@ function CalculateStateComponent() {
             );
             try {
                 const response = await contract.calculateState();
-                console.log(response);
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }

@@ -22,6 +22,7 @@ function EditPensionerComponent() {
         [30 * 60 * 60 * 24, 4, "mes(es) - 30 días"]
     ];
 
+    // Actualiza la fecha de jubilación de un usuario
     async function updateRetireDate() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -34,13 +35,15 @@ function EditPensionerComponent() {
             try {
                 const retireUnixDate = Math.floor(retireDate.getTime() / 1000);
                 const responseRetire = await contract.setRetirementTime(retireUnixDate);
-                console.log(responseRetire);
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }
 
+    // Actualiza la duración de los beneficios de un usuario
     async function updateDuration() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -53,13 +56,15 @@ function EditPensionerComponent() {
             try {
                 const benefitDurationSecs = benefitDuration * units[unitsIndex][0];
                 const responseDuration = await contract.setBenefitDuration(benefitDurationSecs);
-                console.log(responseDuration);
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }
 
+    // Actualiza la fecha de jubilación de un usuario a ahora
     async function updateRetireDateToNow() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -71,9 +76,10 @@ function EditPensionerComponent() {
             );
             try {
                 const responseRetire = await contract.setRetirementTimeNow();
-                console.log(responseRetire);
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }

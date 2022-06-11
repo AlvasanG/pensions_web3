@@ -18,6 +18,7 @@ function UserListComponent() {
         [60 * 60 * 24, "día(s)"]
     ];
 
+    // Recupera el listado de usuarios
     async function getPensionersList() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -50,11 +51,14 @@ function UserListComponent() {
                 }
                 setPensionerList(_pensionerList);
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }
 
+    // Recupera la información de un usuario dado una dirección
     async function buildPensionerFromAddress(pensionerAddress) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -77,10 +81,13 @@ function UserListComponent() {
             totalContributedAmount = totalContributedAmount.toString();
             return [benefitDuration, finishPensionDate, isPensionerRetired, retireAtDate, createdAtTime, totalContributedAmount];
         } catch (error) {
-            console.log(error);
+            let errorCode = error.code;
+            let errorMsg = error.message;
+            alert(errorCode + " --- " + errorMsg);
         }
     }
 
+    // Busca la mejor unidad para mostrar el tiempo
     function getDisplayTime(seconds) {
         let bestUnit = units[0];
         for (const unit of units) {
@@ -95,10 +102,10 @@ function UserListComponent() {
     return (
         <div className="info-display">
             <div className="mb-3">
-                <h1>Listado de pensionistas</h1>
+                <h1>Listado de usuarios</h1>
             </div>
             {pensionerList.length === 0
-                ? <h4>No hay pensionistas</h4>
+                ? <h4>No hay usuarios</h4>
                 : <div className="table-responsive">
                     <table className="table table-striped table-hover align-middle">
                         <caption>Listado de usuarios</caption>

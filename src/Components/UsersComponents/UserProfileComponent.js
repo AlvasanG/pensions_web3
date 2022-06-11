@@ -28,6 +28,7 @@ function UserProfileComponent() {
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [accounts])
 
+    // Recupera la informacion de la primera cuenta del usuario
     async function fetchUserData() {
         if (window.ethereum && accounts.length > 0) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -54,13 +55,15 @@ function UserProfileComponent() {
                     "totalContributedAmount": pensionerInfo[5],
                 };
                 setUserInfo(pensionerObj);
-                console.log(pensionerObj);
             } catch (error) {
-                console.log(error)
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }
 
+    // Recupera la información de un usuario dado una dirección
     async function buildPensionerFromAddress(pensionerAddress) {
         const provider = new ethers.providers.Web3Provider(window.ethereum);
         const signer = provider.getSigner();
@@ -83,10 +86,13 @@ function UserProfileComponent() {
             totalContributedAmount = totalContributedAmount.toString();
             return [benefitDuration, finishPensionDate, isPensionerRetired, retireAtDate, createdAtTime, totalContributedAmount];
         } catch (error) {
-            console.log(error);
+            let errorCode = error.code;
+            let errorMsg = error.message;
+            alert(errorCode + " --- " + errorMsg);
         }
     }
 
+    // Busca la mejor unidad para mostrar el tiempo
     function getDisplayTime(seconds) {
         let bestUnit = units[0];
         for (const unit of units) {
@@ -101,10 +107,10 @@ function UserProfileComponent() {
     return (
         <div className="info-display">
             <div className="mb-3">
-                <h1>Perfil del pensionista</h1>
+                <h1>Perfil del usuario</h1>
             </div>
             {userInfo === undefined
-                ? <h4>El pensionista no está registrado</h4>
+                ? <h4>El usuario no está registrado</h4>
                 : <div>
                     <h2>Dirección: {userInfo.address}</h2>
                     <h3>Contribuciones totales: {userInfo.totalContributedAmount} wei</h3>

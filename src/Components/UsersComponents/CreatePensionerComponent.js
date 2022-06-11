@@ -23,6 +23,7 @@ function CreatePensionerComponent() {
         [30 * 60 * 60 * 24, 4, "mes(es) - 30 días"]
     ];
 
+    // Crea un usuario con los datos del formulario
     async function createPensioner() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -36,9 +37,10 @@ function CreatePensionerComponent() {
                 const retireUnixDate = Math.floor(retireDate.getTime() / 1000);
                 const benefitDurationSecs = benefitDuration * units[unitsIndex][0];
                 const response = await contract.createPensioner(retireUnixDate, benefitDurationSecs);
-                console.log(response);
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }
@@ -58,7 +60,7 @@ function CreatePensionerComponent() {
     return (
         <div className="info-display row">
             <div className="mb-3">
-                <h1>Crear pensionista</h1>
+                <h1>Crear usuario</h1>
             </div>
             <div className="col-lg-6 col-sm-12">
                 <h4>Fecha de retiro</h4>
@@ -82,7 +84,7 @@ function CreatePensionerComponent() {
                 </div>
             </div >
             <div className="col-12 text-center">
-                <button className="bnt btn-primary btn-lg" onClick={() => createPensioner()}>Crear pensionista</button>
+                <button className="bnt btn-primary btn-lg" onClick={() => createPensioner()}>Crear usuario</button>
             </div>
         </div >
     );

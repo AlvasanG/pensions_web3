@@ -19,6 +19,7 @@ function FundPensionComponent() {
         setFundAmount(e.target.value);
     }
 
+    // Realiza una contribucion con el valor del formulario
     async function handleContributions() {
         if (window.ethereum) {
             const provider = new ethers.providers.Web3Provider(window.ethereum);
@@ -32,13 +33,14 @@ function FundPensionComponent() {
                 const bigNumberAmount = FixedNumber.fromString(fundAmount.toString());
                 let options = {
                     value: bigNumberAmount,
-                    gasLimit: 3000000,
-                    gasPrice: 1500
+                    // gasLimit: 3000000,
+                    // gasPrice: 1500
                 };
                 const response = await contract.fundPension(options);
-                console.log(response);
             } catch (error) {
-                console.log(error);
+                let errorCode = error.code;
+                let errorMsg = error.message;
+                alert(errorCode + " --- " + errorMsg);
             }
         }
     }
