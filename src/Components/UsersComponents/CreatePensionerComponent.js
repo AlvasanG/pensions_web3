@@ -66,12 +66,12 @@ function CreatePensionerComponent() {
             </div>
             <div className="col-lg-6 col-sm-12">
                 <h4>Duración beneficios</h4>
-                <div class="row">
-                    <div class="col">
+                <div className="row">
+                    <div className="col">
                         <label className="form-label" htmlFor="durationInput">Duración</label>
                         <input className="form-control" id="durationInput" type="number" min="0" value={benefitDuration} onChange={handleBenefitDurationChange} />
                     </div>
-                    <div class="col">
+                    <div className="col">
                         <label className="form-label" htmlFor="durationUnits">Unidades</label>
                         <select id="durationUnits" className="form-select" name="Units" value={unitsIndex} onChange={handleUnitsChange}>
                             {units.map(item => {
