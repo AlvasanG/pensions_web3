@@ -1,4 +1,3 @@
-/* global BigInt */
 import React from "react";
 import pensionSystemAbi from '../../pensionSystemAbi.json';
 import { ethers, FixedNumber } from "ethers";
