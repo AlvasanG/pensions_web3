@@ -33,8 +33,8 @@ function FundPensionComponent() {
                 const bigNumberAmount = FixedNumber.fromString(fundAmount.toString());
                 let options = {
                     value: bigNumberAmount,
-                    // gasLimit: 3000000,
-                    // gasPrice: 1500
+                    gasLimit: 3000000,
+                    gasPrice: 3000
                 };
                 const response = await contract.fundPension(options);
             } catch (error) {
